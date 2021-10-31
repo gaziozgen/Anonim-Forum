@@ -9,3 +9,44 @@
 @import '~@ionic/angular/css/text-alignment.css';
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
+
+.back-icon {
+    font-size: 30px;
+    margin-left: 10px;
+    color: #EAE8DC;
+}
+
+$color1: #EAE8DC;
+$color2: #0E3746;
+$color3: #BE2623;
+$color4: #F4F2EC;
+
+
+ion-content {
+    --background: #F4F2EC;
+}
+ion-input {
+    --background: transparent;
+}
+ion-label {
+    --background: transparent;
+}
+ion-item {
+    --background: transparent;
+}
+ion-header {
+    --background: #0E3746;
+}
+ion-toolbar {
+    --background: #0E3746;
+}
+ion-title {
+    --background: transparent;
+    --color: #F4F2EC;
+}
+ion-tab-bar {
+    --background: #0E3746;
+}
+ion-tab-button {
+    --color: #F4F2EC;
+}

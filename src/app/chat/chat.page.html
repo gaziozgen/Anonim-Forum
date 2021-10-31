@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Chat</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <!-- <ion-button shape="round" expand="full" color="primary" (click)="refresh()"><ion-icon name="refresh"></ion-icon></ion-button> -->
+
+  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  
+  <ion-card *ngFor="let post of posts; let i = index">
+    <img src="../../assets/post.jpg"/>
+    <ion-card-header>
+      <ion-card-subtitle *ngIf="post.username=='Anonim'">{{post.username}}:</ion-card-subtitle>
+      <ion-card-subtitle *ngIf="post.username!='Anonim'" routerLink="/other-user/{{post.uid}}" routerDirection="forward">{{post.username}}:</ion-card-subtitle>
+      <ion-card-title routerLink="/post/{{post.key}}" routerDirection="forward">{{post.title}}</ion-card-title>
+    </ion-card-header>
+
+      <ion-card-content routerLink="/post/{{post.key}}" routerDirection="forward">
+        {{post.content}}
+      </ion-card-content>
+    
+      <ion-item>
+        <ion-chip outline color="primary" (click)="likePost(post.key, i)">
+          <ion-icon name="happy" color="primary"></ion-icon>
+          <ion-label color="primary">{{post.like}}</ion-label>
+        </ion-chip>
+        <ion-chip outline color="tertiary" routerLink="/post/{{post.key}}" routerDirection="forward">
+          <ion-icon name="chatboxes" color="tertiary"></ion-icon>
+          <ion-label color="tertiary">{{post.comment}}</ion-label>
+        </ion-chip>
+        <ion-icon name="more" slot="end" (click)="optionsPost(post.key)"></ion-icon>
+      </ion-item>
+  </ion-card>
+
+  <!-- <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button color="secondary" (click)="refresh()">
+      <ion-icon name="refresh"></ion-icon>
+    </ion-fab-button>
+  </ion-fab> -->
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="user">
+    <ion-fab-button routerLink="/new-post" routerDirection="forward">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

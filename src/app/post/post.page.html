@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" (click)="goBack()">
+        <ion-icon class="back-icon" name="arrow-back"></ion-icon>
+    </ion-buttons>
+    <ion-title>post</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+    <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+  
+
+    <ion-card *ngIf="post">
+      <img src="../../assets/post.jpg"/>
+      <ion-card-header>
+          <ion-card-subtitle *ngIf="post.username=='Anonim'">{{post.username}}:</ion-card-subtitle>
+          <ion-card-subtitle *ngIf="post.username!='Anonim'" routerLink="/other-user/{{post.uid}}" routerDirection="forward">{{post.username}}:</ion-card-subtitle>
+        <ion-card-title>{{post.title}}</ion-card-title>
+      </ion-card-header>
+  
+        <ion-card-content>
+          {{post.content}}
+        </ion-card-content>
+      
+        <ion-item>
+          <ion-chip outline color="primary" (click)="likePost(post.key)">
+            <ion-icon name="happy" color="primary"></ion-icon>
+            <ion-label color="primary">{{post.like}}</ion-label>
+          </ion-chip>
+          <ion-chip outline color="tertiary">
+            <ion-icon name="chatboxes" color="tertiary"></ion-icon>
+            <ion-label color="tertiary">{{post.comment}}</ion-label>
+          </ion-chip>
+          <ion-icon name="more" slot="end" (click)="optionsPost(post.key)"></ion-icon>
+        </ion-item>
+    </ion-card>
+    <div *ngIf="post">
+      <div *ngIf="post.comments">
+        <ion-card *ngFor="let comment of post.comments; let i = index" >
+          <ion-card-header>
+              <ion-card-subtitle *ngIf="comment.username=='Anonim'">{{comment.username}}:</ion-card-subtitle>
+              <ion-card-subtitle *ngIf="comment.username!='Anonim'" routerLink="/other-user/{{comment.uid}}" routerDirection="forward">{{comment.username}}:</ion-card-subtitle>
+          </ion-card-header>
+
+            <ion-card-content>
+              {{comment.content}}
+            </ion-card-content>
+          
+            <ion-item>
+              <ion-chip outline color="primary" (click)="likeComment(key, i)">
+                <ion-icon name="happy" color="primary"></ion-icon>
+                <ion-label color="primary">{{comment.like}}</ion-label>
+              </ion-chip>
+              <ion-icon name="more" slot="end" (click)="optionsComment(key, i)"></ion-icon>
+            </ion-item>
+        </ion-card>
+      </div>
+    </div>
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="user">
+      <ion-fab-button color="tertiary" routerLink="/new-comment/{{post.key}}" routerDirection="forward">
+        <ion-icon name="chatboxes"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
+</ion-content>

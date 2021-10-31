@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" (click)="goBack()">
+        <ion-icon class="back-icon" name="arrow-back"></ion-icon>
+    </ion-buttons>
+    <ion-title>Yeni Yorum</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+    <ion-item>
+      <ion-label>Anonim olsun</ion-label>
+      <ion-toggle color="dark" [(ngModel)]="anonim"></ion-toggle>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label position="floating">İçerik:</ion-label>
+      <ion-textarea rows="8" [(ngModel)]="content"></ion-textarea>
+    </ion-item>
+  
+    <ion-button (click)="createComment()" color="tertiary" size="large" shape="round" expand="full" margin>Yorum Oluştur</ion-button>
+
+</ion-content>
